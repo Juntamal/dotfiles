@@ -60,8 +60,6 @@ set number
 set laststatus=2
 " カーソル位置を表示する
 set ruler
-" カーソルのある行に下線を引く
-" set cursorline
 
 " 自動インデントを有効にする
 set autoindent
@@ -119,10 +117,11 @@ let g:neocomplcache_enable_underbar_completion=1
 let g:neocomplcache_min_syntax_length=3
 
 " NERDTree
-nnoremap <silent> <Leader>nt :<C-u>NERDTreeToggle<Return>
+let mapleader = ","
+nmap <leader>ne :NERDTree<cr>
 " map, nmap
 " 保存とか
-nmap <Space>w :up<CR>
+nmap <Space>w :w<CR>
 nmap <Space>q :q<CR>
 nmap <Space>z <C-z>
 
