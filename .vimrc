@@ -148,6 +148,14 @@ imap <C-k> <ESC>"+gpa
 
 " <ESC> when typing 'jj' quick
 inoremap jj <Esc>
+" 括弧補完
+inoremap { {}<Left>
+inoremap [ []<LEFT>
+inoremap ( ()<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+inoremap {<Enter> {}<Left><CR><ESC><S-o>
+inoremap (<Enter> ()<Left><CR><ESC><S-o>
 " Swap up/down with up/down with display lines
 nnoremap j gj
 nnoremap k gk
