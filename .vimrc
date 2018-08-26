@@ -12,6 +12,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rvm'
 Plug 'tpope/vim-haml'
 Plug 'skwp/vim-rspec'
+Plug 'tpope/vim-rails'
 Plug 'Shougo/neocomplcache'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler'
@@ -20,6 +21,7 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'h1mesuke/unite-outline'
 Plug 'vim-ruby/vim-ruby'
 Plug 'othree/html5.vim'
+Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'scrooloose/nerdtree'
 Plug 'pangloss/vim-javascript'
@@ -116,6 +118,8 @@ let g:neocomplcache_enable_camel_case_completion=1
 let g:neocomplcache_enable_underbar_completion=1
 let g:neocomplcache_min_syntax_length=3
 
+" NERDTree
+nnoremap <silent> <Leader>nt :<C-u>NERDTreeToggle<Return>
 " map, nmap
 " 保存とか
 nmap <Space>w :up<CR>
@@ -143,6 +147,13 @@ imap <C-Space> <C-x><C-o>
 "CTRL-kでクリップボードから貼り付け
 imap <C-k> <ESC>"+gpa
 
+" <ESC> when typing 'jj' quick
+inoremap jj <Esc>
+" Swap up/down with up/down with display lines
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
 "edit routes & schema
 
 " Edit routes
