@@ -1,0 +1,62 @@
+# Your keymap
+#
+# Atom keymaps work similarly to style sheets. Just as style sheets use
+# selectors to apply styles to elements, Atom keymaps use selectors to associate
+# keystrokes with events in specific contexts. Unlike style sheets however,
+# each selector can only be declared once.
+#
+# You can create a new keybinding in this file by typing "key" and then hitting
+# tab.
+#
+# Here's an example taken from Atom's built-in keymap:
+#
+# 'atom-text-editor':
+#   'enter': 'editor:newline'
+#
+# 'atom-workspace':
+#   'ctrl-shift-p': 'core:move-up'
+#   'ctrl-p': 'core:move-down'
+#
+# You can find more information about keymaps in these guides:
+# * http://flight-manual.atom.io/using-atom/sections/basic-customization/#customizing-keybindings
+# * http://flight-manual.atom.io/behind-atom/sections/keymaps-in-depth/
+#
+# If you're having trouble with your keybindings not working, try the
+# Keybinding Resolver: `Cmd+.` on macOS and `Ctrl+.` on other platforms. See the
+# Debugging Guide for more information:
+# * http://flight-manual.atom.io/hacking-atom/sections/debugging/#check-the-keybindings
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# http://flight-manual.atom.io/using-atom/sections/basic-customization/#configuring-with-cson
+# 'platformio-ide-terminal:focus':
+#   'ctrl-;'
+'body atom-text-editor.autocomplete-active':
+  'ctrl-n': 'autocomplete-plus:move-down'
+  'ctrl-p': 'autocomplete-plus:move-up'
+  'enter': 'autocomplete-plus:confirm'
+'atom-workspace':
+  'ctrl-;': 'editor:focus-main'
+'atom-text-editor:not([mini])':
+  'ctrl-e': 'editor:move-to-end-of-line'
+  'cmd-e': 'emmet:expand-abbreviation'
+'.platform-darwin atom-workspace':
+  'ctrl-0': 'platformio-ide-terminal:toggle'
+  'shift-cmd-0': 'platformio-ide-terminal:new'
+  'alt-cmd-f': 'platformio-ide-terminal:focus'
+  'shift-cmd-K': 'platformio-ide-terminal:next'
+  'shift-cmd-T': 'platformio-ide-terminal:new'
+'.platform-darwin atom-text-editor':
+  'ctrl-w': 'script:close-view'
+'atom-text-editor':
+  'ctrl-alt-m': 'rspec:run'
+  'ctrl-shift-o': 'autocomplete-plus:activate'
+  'ctrl-space': 'autocomplete-plus:activate'
+'atom-text-editor[data-grammar="text html basic"]:not([mini]), atom-text-editor[data-grammar~="erb"]:not([mini]), atom-text-editor[data-grammar~="jade"]:not([mini]), atom-text-editor[data-grammar~="css"]:not([mini]), atom-text-editor[data-grammar~="stylus"]:not([mini]), atom-text-editor[data-grammar~="sass"]:not([mini]), atom-text-editor[data-grammar~="scss"]:not([mini])':
+	'ctrl-n': 'autocomplete-plus:move-down'
+# '.platform-darwin atom-text-editor[data-grammar~=js]':
+#   'ctrl-alt-space': 'atom-ternjs:startCompletion'
+'.platform-darwin .platformio-ide-terminal .terminal':
+  'cmd-v': 'platformio-ide-terminal:paste'
+  'cmd-c': 'platformio-ide-terminal:copy'
