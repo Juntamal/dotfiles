@@ -1,6 +1,5 @@
 call plug#begin('~/.vim/plugged')
 
-
 Plug 'VundleVim/Vundle.vim'
 Plug 'tpope/vim-vividchalk'
 Plug 'morhetz/gruvbox'
@@ -13,6 +12,7 @@ Plug 'tpope/vim-rvm'
 Plug 'tpope/vim-haml'
 Plug 'skwp/vim-rspec'
 Plug 'tpope/vim-rails'
+Plug 'tomtom/tcomment_vim'
 Plug 'Shougo/neocomplcache'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler'
@@ -25,7 +25,8 @@ Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'scrooloose/nerdtree'
 Plug 'pangloss/vim-javascript'
-Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " 文字コードの設定
@@ -40,6 +41,12 @@ set hlsearch
 set ignorecase
 " 検索時、大文字から始めたら大文字小文字を無視しない
 set smartcase
+" タブ文字の表示幅
+set tabstop=2
+" Vimが挿入するインデントの幅
+set shiftwidth=2
+" 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする
+set smarttab
 " ファイル形式の検出
 filetype on
 " ファイル形式別のインデントを有効にする
@@ -80,27 +87,12 @@ syntax on
 set t_Co=256
 colorscheme badwolf
 
-"" Ruby, Ruby on Rails, Sinatraなどの開発用オプション
-" 通常、tabはスペース4つ分
-au BufNewFile,BufRead * set tabstop=4 shiftwidth=4
-" erb/html/yml/rbの場合はスペース2つ分
-au BufNewFile,BufRead *.html.erb set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.rb set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.rhtml set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.html set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.yml set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.haml set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.js set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.js.coffee set tabstop=2 shiftwidth=2 expandtab
-" RailsはUTF-8で書く　
-au User Rails* set fenc=utf-8
 let ruby_space_errors=1
 let g:rubycomplete_buffer_loading=1
 let g:rubycomplete_classes_in_global=1
 let g:rubycomplete_rails=1
 let g:rails_level=4
 let g:rails_syntax=1
-let g:rails_default_database='sqlite3'
 
 let g:javascript_plugin_flow = 1
 
@@ -119,8 +111,8 @@ let g:neocomplcache_min_syntax_length=3
 " NERDTree
 let mapleader = ","
 nmap <leader>ne :NERDTree<cr>
-" map, nmap
-" 保存とか
+
+" save
 nmap <Space>w :w<CR>
 nmap <Space>q :q<CR>
 nmap <Space>z <C-z>
@@ -148,6 +140,7 @@ imap <C-k> <ESC>"+gpa
 
 " <ESC> when typing 'jj' quick
 inoremap jj <Esc>
+
 " 括弧補完
 inoremap { {}<Left>
 inoremap [ []<LEFT>
@@ -156,18 +149,12 @@ inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
+
 " Swap up/down with up/down with display lines
 nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
-"edit routes & schema
-
-" Edit routes
-command! Rroutes :e config/routes.rb
-command! Rschema :e db/schema.rb
-command! Rapp :e config/application.rb
-command! Rinitializer :e config/initializers/
 
 function! MagicComment()
   return "# coding: utf-8\<CR>"
@@ -182,14 +169,6 @@ nnoremap <Space>. :<C-u>edit ~/.vimrc<Enter>
 noremap ; :
 
 noremap <Shift>: ;
-
-
-
-" Vimテクニックバイブルのお試し系
-
-" Insertのときにstatuslineの色を変える
-au InsertEnter * hi StatusLine guifg=Black guibg=Yellow gui=none ctermfg=Black ctermbg=Yellow cterm=none
-au InsertLeave * hi StatusLine guifg=White guibg=DarkGray gui=none ctermfg=White ctermbg=DarkGray cterm=none
 
 set listchars=eol:$,tab:>\
 
