@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'VundleVim/Vundle.vim'
 Plug 'tpope/vim-vividchalk'
 Plug 'morhetz/gruvbox'
@@ -10,6 +11,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rvm'
 Plug 'tpope/vim-haml'
+Plug 'tpope/vim-fugitive'
 Plug 'skwp/vim-rspec'
 Plug 'tpope/vim-rails'
 Plug 'tomtom/tcomment_vim'
@@ -82,10 +84,11 @@ set showmatch
 " シンタックスハイライトを有効化する
 syntax on
 
-" vividchalk as colorscheme
+" colorscheme
 " colorscheme vividchalk
 set t_Co=256
 colorscheme badwolf
+let g:airline_theme ='badwolf'
 
 let ruby_space_errors=1
 let g:rubycomplete_buffer_loading=1
@@ -111,7 +114,6 @@ let g:neocomplcache_min_syntax_length=3
 " NERDTree
 let mapleader = ","
 nmap <leader>ne :NERDTree<cr>
-
 " save
 nmap <Space>w :w<CR>
 nmap <Space>q :q<CR>
