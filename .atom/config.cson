@@ -1,23 +1,20 @@
 "*":
+  "atom-clock":
+    locale: "ja"
+    showClockIcon: true
   "atom-material-ui":
     colors:
       abaseColor: "#7e57c2"
       accentColor: "#b0e457"
       predefinedColor: "Purple"
-    fonts: {}
+    fonts:
+      fontSize: 17
     tabs:
       compactTabs: true
     ui:
       panelContrast: true
       useAnimations: false
-  "atom-package-deps":
-    ignored: [
-      "linter-ui-default"
-    ]
-  "atom-pair":
-    slack_url: "diveintocode.slack.com"
-  "atom-runner":
-    showOutputWindow: false
+  "autocomplete-paths": {}
   "autocomplete-plus":
     suppressActivationForEditorClasses: [
       "vim-mode-plus.normal-mode"
@@ -27,33 +24,26 @@
     ]
     useCoreMovementCommands: false
   "autocomplete-ruby":
-    rsensePath: "/Users/jun/.rbenv/versions/2.5.1/bin/rsense"
+    rsensePath: "/Users/yamada_junki/.rbenv/versions/2.5.1/bin/rsence"
   core:
-    closeDeletedFileTabs: true
-    customFileTypes:
-      "text.html.ruby": [
-        "rhtml"
-        "html.erb"
-      ]
+    audioBeep: false
     disabledPackages: [
       "wrap-guide"
       "minimap"
       "minimap-highlight-selected"
-      "atom-autocomplete-php"
+      "split-diff"
       "atom-pair"
       "autocomplete-php"
-      "linter-php"
+      "git-time-machine"
+      "git-log"
       "japanese-menu"
       "markdown-scroll-sync"
-      "rails-snippets"
-      "web-search"
+      "linter-jscs"
       "vim-mode-plus-ex-mode"
     ]
     packagesWithKeymapsDisabled: [
-      "sass-autocompile"
       "platformio-ide-terminal"
     ]
-    projectHome: "/Users/jun/Workspace"
     telemetryConsent: "no"
     themes: [
       "atom-material-ui"
@@ -61,72 +51,52 @@
     ]
     titleBar: "hidden"
   editor:
-    fontFamily: "Cica"
-    invisibles: {}
-    scrollPastEnd: true
+    fontFamily: "CIca"
     showIndentGuide: true
+    showInvisibles: true
     softWrap: true
     tabType: "soft"
-  "ex-mode": {}
   "exception-reporting":
-    userId: "8d343ca5-383b-47aa-8acd-9c7b4e39dc19"
+    userId: "f5701c8b-b9bd-462c-8a3b-27b6a574afb7"
+  "file-types":
+    "*.rb": "source.ruby.rails"
   "gruvbox-plus-syntax":
     contrast: "Hard"
   "linter-rubocop":
-    command: "/Users/jun/.rbenv/versions/2.5.1/bin/rubocop"
+    command: "/Users/yamada_junki/.rbenv/versions/2.5.1/bin/rubocop"
   "linter-ruby":
-    rubyExecutablePath: "/Users/jun/.rbenv/shims/ruby"
-  "linter-ui-default": {}
-  "markdown-preview":
-    useGitHubStyle: true
+    rubyExecutablePath: "/Users/yamada_junki/.rbenv/shims/ruby"
+  "linter-ui-default":
+    panelHeight: 240
   minimap:
-    absoluteMode: true
     plugins:
       "highlight-selected": true
       "highlight-selectedDecorationsZIndex": 0
   "platformio-ide-terminal":
     ansiColors:
       normal:
-        blue: "#00bcff"
-        green: "#18b046"
-        magenta: "#f683e8"
-        red: "#cc315c"
+        blue: "#007fca"
+        green: "#85cc47"
+        magenta: "#d744c9"
+        red: "#cc3d50"
+        yellow: "#cfc300"
       zBright:
-        brightBlack: "#a8a7a9"
-        brightBlue: "#3874fd"
-        brightRed: "#dc2b38"
-    customTexts: {}
-    iconColors:
-      orange: "#ff9300"
+        brightBlue: "#0098fc"
+        brightGreen: "#00db05"
     style:
       fontFamily: "Cica"
       fontSize: "16"
       theme: "dracula"
     toggles:
-      autoClose: true
       cursorBlink: false
   rspec:
     command: "bundle exec rspec"
-  "rubocop-auto-correct":
-    autoRun: true
-    correctFile: true
   "ruby-block":
     highlightLine: false
     highlightLineNumber: true
-  "seti-syntax":
-    themeColor: "Green"
   "seti-ui":
     compactView: true
-    disableAnimations: true
     themeColor: "Purple"
-  term3:
-    colors:
-      background: "#070707"
-    cursorBlink: false
-    fontFamily: "Cica"
-    fontSize: "21px"
   "tree-view": {}
-  "vim-mode-plus":
-    autoDisableInputMethodWhenLeavingInsertMode: true
   welcome:
     showOnStartup: false

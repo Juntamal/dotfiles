@@ -45,18 +45,24 @@
   'ctrl-0': 'platformio-ide-terminal:toggle'
   'shift-cmd-0': 'platformio-ide-terminal:new'
   'alt-cmd-f': 'platformio-ide-terminal:focus'
-  'shift-cmd-K': 'platformio-ide-terminal:next'
-  'shift-cmd-T': 'platformio-ide-terminal:new'
+
 '.platform-darwin atom-text-editor':
   'ctrl-w': 'script:close-view'
 'atom-text-editor':
   'ctrl-alt-m': 'rspec:run'
-  'ctrl-shift-o': 'autocomplete-plus:activate'
   'ctrl-space': 'autocomplete-plus:activate'
 'atom-text-editor[data-grammar="text html basic"]:not([mini]), atom-text-editor[data-grammar~="erb"]:not([mini]), atom-text-editor[data-grammar~="jade"]:not([mini]), atom-text-editor[data-grammar~="css"]:not([mini]), atom-text-editor[data-grammar~="stylus"]:not([mini]), atom-text-editor[data-grammar~="sass"]:not([mini]), atom-text-editor[data-grammar~="scss"]:not([mini])':
 	'ctrl-n': 'autocomplete-plus:move-down'
-# '.platform-darwin atom-text-editor[data-grammar~=js]':
-#   'ctrl-alt-space': 'atom-ternjs:startCompletion'
+	'ctrl-p': 'autocomplete-plus:move-up'
+'.platform-darwin':
+  'cmd-f': 'find-and-replace:toggle'
+'body':
+  'ctrl-tab ^ctrl': 'unset!'
+  'ctrl-tab': 'pane:show-next-item'
+  'ctrl-shift-tab ^ctrl': 'unset!'
+  'ctrl-shift-tab': 'pane:show-previous-item'
+  'cmd-q': 'unset!'
+  'cmd-alt-shift-q': 'application:quit'
 '.platform-darwin .platformio-ide-terminal .terminal':
-  'cmd-v': 'platformio-ide-terminal:paste'
   'cmd-c': 'platformio-ide-terminal:copy'
+  'cmd-v': 'platformio-ide-terminal:paste'
