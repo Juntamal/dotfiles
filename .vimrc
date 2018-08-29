@@ -79,14 +79,19 @@ set listchars=tab:>\ ,extends:<
 " 対応する括弧やブレースを表示する
 set showmatch
 
+" 検索
 set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
 set ignorecase " 検索パターンに大文字小文字を区別しない
 set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
 set hlsearch " 検索結果をハイライト
-
-set clipboard=unnamed,autoselect
 " ESCキー2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+
+" クリップボード
+set clipboard=unnamed,autoselect
+
+" Insertからを早く
+set ttimeoutlen=50
 
 " シンタックスハイライトを有効化する
 syntax on
@@ -96,7 +101,49 @@ syntax on
 set t_Co=256
 colorscheme badwolf
 " colorscheme gruvbox
+
+
+"airline
 let g:airline_theme ='badwolf'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_format = {
+	\ '0': '0 ',
+	\ '1': '1 ',
+	\ '2': '2 ',
+	\ '3': '3 ',
+	\ '4': '4 ',
+	\ '5': '5 ',
+	\ '6': '6 ',
+	\ '7': '7 ',
+	\ '8': '8 ',
+	\ '9': '9 '
+	\}
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
 
 let ruby_space_errors=1
 let g:rubycomplete_buffer_loading=1
@@ -104,7 +151,6 @@ let g:rubycomplete_classes_in_global=1
 let g:rubycomplete_rails=1
 let g:rails_level=4
 let g:rails_syntax=1
-
 let g:javascript_plugin_flow = 1
 
 "バッファタブにパスを省略してファイル名のみ表示する(buftabs.vim)
