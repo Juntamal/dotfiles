@@ -1,5 +1,4 @@
 call plug#begin('~/.vim/plugged')
-
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'VundleVim/Vundle.vim'
 Plug 'tpope/vim-vividchalk'
@@ -29,6 +28,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'pangloss/vim-javascript'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'cohama/lexima.vim'
 call plug#end()
 
 " 文字コードの設定
@@ -43,31 +43,28 @@ set hlsearch
 set ignorecase
 " 検索時、大文字から始めたら大文字小文字を無視しない
 set smartcase
-" タブ文字の表示幅
+" TABキーを押した際にタブ文字の代わりにスペースを入れる
+set expandtab
 set tabstop=2
-" Vimが挿入するインデントの幅
 set shiftwidth=2
+
 " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする
 set smarttab
 " ファイル形式の検出
 filetype on
-" ファイル形式別のインデントを有効にする
-" ファイル形式別のプラグインを有効にする
-filetype plugin indent on
 
 " エラーベルを鳴らさない
 set noerrorbells
 
 " バックアップファイルを作らない
 set nobackup
+set noswapfile
 
 " バッファを切り替えてもundoの効果を失わないようにする
 set hidden
 " 行数を表示する
 set number
 " ステータスバーを下から2行目に表示
-set laststatus=2
-" カーソル位置を表示する
 set ruler
 
 " 自動インデントを有効にする
@@ -81,6 +78,14 @@ set listchars=tab:>\ ,extends:<
 " 対応する括弧やブレースを表示する
 set showmatch
 
+set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
+set ignorecase " 検索パターンに大文字小文字を区別しない
+set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
+set hlsearch " 検索結果をハイライト
+
+" ESCキー2度押しでハイライトの切り替え
+nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+
 " シンタックスハイライトを有効化する
 syntax on
 
@@ -88,6 +93,7 @@ syntax on
 " colorscheme vividchalk
 set t_Co=256
 colorscheme badwolf
+" colorscheme gruvbox
 let g:airline_theme ='badwolf'
 
 let ruby_space_errors=1
@@ -104,6 +110,11 @@ let g:buftabs_only_basename=1
 "バッファタブをステータスライン内に表示する
 let g:buftabs_in_statusline=1
 
+
+" indentLine
+" let g:indentLine_color_term = 1
+" let g:indentLine_color_gui = '#708090'
+" let g:indentLine_char = '|'
 "neocomplcache周りの設定
 let g:neocomplcache_enable_at_startup=1
 let g:neocomplcache_enable_smart_case=1
@@ -144,13 +155,30 @@ imap <C-k> <ESC>"+gpa
 inoremap jj <Esc>
 
 " 括弧補完
-inoremap { {}<Left>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-inoremap {<Enter> {}<Left><CR><ESC><S-o>
-inoremap (<Enter> ()<Left><CR><ESC><S-o>
+" inoremap { {}<Left>
+" inoremap [ []<LEFT>
+" inoremap ( ()<LEFT>
+" inoremap " ""<LEFT>
+" inoremap ' ''<LEFT>
+" inoremap {<Enter> {}<Left><CR><ESC><S-o>
+" inoremap (<Enter> ()<Left><CR><ESC><S-o>
+
+""""""""""""""""""""""""""""""
+" 全角スペースの表示
+""""""""""""""""""""""""""""""
+function! ZenkakuSpace()
+    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+endfunction
+
+if has('syntax')
+    augroup ZenkakuSpace
+        autocmd!
+        autocmd ColorScheme * call ZenkakuSpace()
+        autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
+    augroup END
+    call ZenkakuSpace()
+endif
+""""""""""""""""""""""""""""""
 
 " Swap up/down with up/down with display lines
 nnoremap j gj
