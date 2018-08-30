@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'VundleVim/Vundle.vim'
@@ -36,6 +37,10 @@ call plug#end()
 set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
+set guifont=Cica:h16
+set printfont=Cica:h12
+set ambiwidth=double
+
 " 常にステータスラインを表示
 set laststatus=2
 " 検索文字のハイライト
@@ -101,7 +106,9 @@ syntax on
 set t_Co=256
 colorscheme badwolf
 " colorscheme gruvbox
-
+"
+" フォルダアイコンの表示をON
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
 "airline
 let g:airline_theme ='badwolf'
