@@ -104,8 +104,10 @@ syntax on
 " colorscheme
 " colorscheme vividchalk
 set t_Co=256
-colorscheme badwolf
-" colorscheme gruvbox
+" colorscheme badwolf
+colorscheme gruvbox
+set background=dark
+
 "
 " フォルダアイコンの表示をON
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -197,6 +199,7 @@ nmap <Space>w :w<CR>
 nmap <Space>q :q<CR>
 nmap <Space>q :q<CR>
 nmap <Space>z <C-z>
+nmap <Space>e :bufdo e!<CR>
 
 " Space + hl で:nohl
 nmap <Space>hl :nohl<CR>
