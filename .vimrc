@@ -158,6 +158,8 @@ let g:buftabs_only_basename=1
 "バッファタブをステータスライン内に表示する
 let g:buftabs_in_statusline=1
 
+" ctrlp
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " indentLine
 " let g:indentLine_color_term = 1
