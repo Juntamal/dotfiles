@@ -73,6 +73,9 @@ set number
 " ステータスバーを下から2行目に表示
 set ruler
 
+" deleteが効かない問題の修正
+set backspace=indent,eol,start
+
 " 自動インデントを有効にする
 set autoindent
 " コマンドラインモードで<Tab>キーによるファイル名補完を有効にする
@@ -104,16 +107,16 @@ syntax on
 " colorscheme
 " colorscheme vividchalk
 set t_Co=256
-" colorscheme badwolf
-colorscheme gruvbox
-set background=dark
+colorscheme badwolf
+" colorscheme gruvbox
+" set background=dark
 
 "
 " フォルダアイコンの表示をON
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
 "airline
-let g:airline_theme ='badwolf'
+let g:airline_theme ='violet'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_format = {
 	\ '0': '0 ',
