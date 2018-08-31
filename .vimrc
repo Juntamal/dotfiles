@@ -115,6 +115,22 @@ colorscheme badwolf
 " フォルダアイコンの表示をON
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
+" vモードの置換連続ペースト用
+function! Put_text_without_override_register()
+  let line_len = strlen(getline('.'))
+  execute "normal! `>"
+  let col_loc = col('.')
+  execute 'normal! gv"_x'
+  if line_len == col_loc
+    execute 'normal! p'
+  else
+    execute 'normal! P'
+  endif
+endfunction
+xnoremap <silent> p :call Put_text_without_override_register()<CR>
+
+set clipboard=unnamed "ヤンクした時に自動でクリップボードにコピー(autoselectを指定するとvモードの置換連続ペーストができない)
+
 "airline
 let g:airline_theme ='violet'
 let g:airline#extensions#tabline#enabled = 1
