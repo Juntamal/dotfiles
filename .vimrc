@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+" Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -43,10 +44,6 @@ set ambiwidth=double
 
 " 常にステータスラインを表示
 set laststatus=2
-" 検索文字のハイライト
-set hlsearch
-" 検索時、大文字小文字無視
-set ignorecase
 " 検索時、大文字から始めたら大文字小文字を無視しない
 set smartcase
 " TABキーを押した際にタブ文字の代わりにスペースを入れる
@@ -88,6 +85,8 @@ set listchars=tab:>\ ,extends:<
 set showmatch
 
 " 検索
+set hlsearch
+set ignorecase
 set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
 set ignorecase " 検索パターンに大文字小文字を区別しない
 set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
@@ -130,6 +129,75 @@ endfunction
 xnoremap <silent> p :call Put_text_without_override_register()<CR>
 
 set clipboard=unnamed "ヤンクした時に自動でクリップボードにコピー(autoselectを指定するとvモードの置換連続ペーストができない)
+
+" let g:lightline = {
+"             \ 'colorscheme': 'jellybeans',
+"             \ 'active': {
+"             \   'left': [ [ 'mode', 'paste' ],
+"             \             [ 'fugitive', 'filename' ] ]
+"             \ },
+"             \ 'component_function': {
+"             \   'fugitive': 'LightLineFugitive',
+"             \   'readonly': 'LightLineReadonly',
+"             \   'modified': 'LightLineModified',
+"             \   'filename': 'LightLineFilename',
+"             \   'filetype': 'LightLineFiletype',
+"             \   'fileformat': 'LightLineFileformat',
+"             \ },
+"             \ 'separator': { 'left': '', 'right': '' },
+"             \ 'subseparator': { 'left': '', 'right': '' }
+"             \ }
+"
+" function! LightLineModified()
+"     if &filetype == "help"
+"         return ""
+"     elseif &modified
+"         return "+"
+"     elseif &modifiable
+"         return ""
+"     else
+"         return ""
+"     endif
+" endfunction
+"
+" function! LightLineReadonly()
+"     if &filetype == "help"
+"         return ""
+"     elseif &readonly
+"         return ""
+"     else
+"         return ""
+"     endif
+" endfunction
+"
+" function! LightLineFugitive()
+"     if exists("*fugitive#head")
+"         let _ = fugitive#head()
+"         return strlen(_) ? ''._ : ''
+"     endif
+"     return ''
+" endfunction
+"
+" function! LightLineFilename()
+"     return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+"                 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+"                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+" endfunction
+"
+" function! LightLineFiletype()
+"   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+" endfunction
+"
+" function! LightLineFileformat()
+"   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+" endfunction
+"
+" " let g:lightline.tabline = {
+" "   \   'left': [ ['tabs'] ],
+" "   \   'right': [ ['close'] ]
+" "   \ }
+" set showtabline=2  " Show tabline
+
 
 "airline
 let g:airline_theme ='violet'
@@ -218,7 +286,7 @@ nmap <Space>w :w<CR>
 nmap <Space>q :q<CR>
 nmap <Space>q :q<CR>
 nmap <Space>z <C-z>
-nmap <Space>e :bufdo e!<CR>
+nmap <Space>e :e!<CR>
 
 " Space + hl で:nohl
 nmap <Space>hl :nohl<CR>
