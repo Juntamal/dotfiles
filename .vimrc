@@ -1,12 +1,9 @@
 call plug#begin('~/.vim/plugged')
-" Plug 'itchyny/lightline.vim'
+
 Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'VundleVim/Vundle.vim'
-Plug 'tpope/vim-vividchalk'
-Plug 'morhetz/gruvbox'
-Plug 'sjl/badwolf'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-rails'
@@ -15,7 +12,6 @@ Plug 'tpope/vim-rvm'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-fugitive'
 Plug 'skwp/vim-rspec'
-Plug 'tpope/vim-rails'
 Plug 'tomtom/tcomment_vim'
 Plug 'Shougo/neocomplcache'
 Plug 'Shougo/unite.vim'
@@ -31,8 +27,21 @@ Plug 'scrooloose/nerdtree'
 Plug 'pangloss/vim-javascript'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" Plug 'itchyny/lightline.vim'
 Plug 'cohama/lexima.vim'
+
+"colorscheme
+Plug 'tpope/vim-vividchalk'
+Plug 'morhetz/gruvbox'
+Plug 'sjl/badwolf'
+
 call plug#end()
+
+" ファイル形式の検出
+filetype on
+
+" Visualmode 調整
+autocmd ColorScheme gruvbox highlight Visual cterm=bold ctermbg=237 ctermfg=NONE
 
 " 文字コードの設定
 set encoding=utf-8
@@ -42,19 +51,17 @@ set guifont=Cica:h16
 set printfont=Cica:h12
 set ambiwidth=double
 
-" 常にステータスラインを表示
-set laststatus=2
-" 検索時、大文字から始めたら大文字小文字を無視しない
-set smartcase
 " TABキーを押した際にタブ文字の代わりにスペースを入れる
 set expandtab
 set tabstop=2
 set shiftwidth=2
+set smarttab " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする
 
-" 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする
-set smarttab
-" ファイル形式の検出
-filetype on
+" 常にステータスラインを表示
+set laststatus=2
+
+" 検索時、大文字から始めたら大文字小文字を無視しない
+set smartcase
 
 " エラーベルを鳴らさない
 set noerrorbells
@@ -65,8 +72,10 @@ set noswapfile
 
 " バッファを切り替えてもundoの効果を失わないようにする
 set hidden
+
 " 行数を表示する
 set number
+
 " ステータスバーを下から2行目に表示
 set ruler
 
@@ -75,12 +84,16 @@ set backspace=indent,eol,start
 
 " 自動インデントを有効にする
 set autoindent
+
 " コマンドラインモードで<Tab>キーによるファイル名補完を有効にする
 set wildmenu
+
 " 入力中のコマンドを表示する
 set showcmd
+
 " タブと行の続きを可視化する
 set listchars=tab:>\ ,extends:<
+
 " 対応する括弧やブレースを表示する
 set showmatch
 
@@ -106,11 +119,10 @@ syntax on
 " colorscheme
 " colorscheme vividchalk
 set t_Co=256
-colorscheme badwolf
-" colorscheme gruvbox
-" set background=dark
+" colorscheme badwolf
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
 
-"
 " フォルダアイコンの表示をON
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
@@ -200,7 +212,7 @@ set clipboard=unnamed "ヤンクした時に自動でクリップボードにコ
 
 
 "airline
-let g:airline_theme ='violet'
+let g:airline_theme ='dracula'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_format = {
 	\ '0': '0 ',
@@ -278,9 +290,35 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-" NERDTree
-let mapleader = ","
-nmap <leader>ne :NERDTree<cr>
+" NERDTree ---------------------------------------------------------------------
+nmap <C-\> :NERDTreeToggle<cr>
+map <silent> <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+
+autocmd StdinReadPre * let s:std_in=1
+let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.DS_Store$']
+let g:NERDTreeWinSize=45
+let g:NERDTreeAutoDeleteBuffer=1
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('rb', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('js', 'Magenta', 'none', '#ffa500', '#151515')
+
 " save
 nmap <Space>w :w<CR>
 nmap <Space>q :q<CR>
