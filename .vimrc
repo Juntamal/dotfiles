@@ -1,7 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'VundleVim/Vundle.vim'
@@ -36,6 +35,7 @@ Plug 'tpope/vim-vividchalk'
 Plug 'morhetz/gruvbox'
 Plug 'sjl/badwolf'
 
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " ファイル形式の検出
@@ -139,10 +139,12 @@ colorscheme gruvbox
 
 " フォルダアイコンの表示をON
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol='x'
 
-
+" Lightline---------------------------------------
+" set showtabline=2  " Show tabline
 " let g:lightline = {
-"             \ 'colorscheme': 'jellybeans',
+"             \ 'colorscheme': 'one',
 "             \ 'active': {
 "             \   'left': [ [ 'mode', 'paste' ],
 "             \             [ 'fugitive', 'filename' ] ]
@@ -203,14 +205,13 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 "   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 " endfunction
 "
-" " let g:lightline.tabline = {
-" "   \   'left': [ ['tabs'] ],
-" "   \   'right': [ ['close'] ]
-" "   \ }
-" set showtabline=2  " Show tabline
+" let g:lightline.tabline = {
+"   \   'left': [ ['tabs'] ],
+"   \   'right': [ ['close'] ]
+"   \ }
 
 
-"airline
+"airline------------------------------------------------
 let g:airline_theme ='dracula'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_format = {
