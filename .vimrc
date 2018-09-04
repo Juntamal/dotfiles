@@ -42,7 +42,7 @@ call plug#end()
 filetype on
 
 " Visualmode 調整
-autocmd ColorScheme gruvbox highlight Visual cterm=bold ctermbg=237 ctermfg=NONE
+autocmd ColorScheme gruvbox highlight Visual cterm=bold ctermbg=238 ctermfg=NONE
 
 " 文字コードの設定
 set encoding=utf-8
