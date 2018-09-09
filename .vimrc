@@ -28,6 +28,7 @@ Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] } | Pl
 Plug 'Quramy/vim-js-pretty-template', { 'for': ['javascript', 'typescript'] }
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'mattn/emmet-vim'
 " Plug 'itchyny/lightline.vim'
 Plug 'cohama/lexima.vim'
 Plug 'othree/html5.vim'
@@ -53,6 +54,28 @@ set fileencoding=utf-8
 set guifont=Cica:h16
 set printfont=Cica:h12
 set ambiwidth=double
+
+" 画面分割
+nnoremap s <Nop>
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+nnoremap sJ <C-w>J
+nnoremap sK <C-w>K
+nnoremap sL <C-w>L
+nnoremap sH <C-w>H
+nnoremap sn gt
+nnoremap sp gT
+nnoremap sr <C-w>r
+nnoremap sw <C-w>w
+nnoremap sN :<C-u>bn<CR>
+nnoremap sP :<C-u>bp<CR>
+nnoremap st :<C-u>tabnew<CR>
+nnoremap sT :<C-u>Unite tab<CR>
+nnoremap ss :<C-u>sp<CR>
+nnoremap sv :<C-u>vs<CR>
+nnoremap sq :<C-u>q<CR>
 
 " TABキーを押した際にタブ文字の代わりにスペースを入れる
 set expandtab
@@ -99,6 +122,9 @@ set listchars=tab:>\ ,extends:<
 
 " 対応する括弧やブレースを表示する
 set showmatch
+
+" emmet
+let g:user_emmet_leader_key='<c-y>'
 
 " 検索
 set hlsearch
