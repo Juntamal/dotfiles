@@ -24,11 +24,13 @@ Plug 'othree/html5.vim'
 Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'scrooloose/nerdtree'
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] } | Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
+Plug 'Quramy/vim-js-pretty-template', { 'for': ['javascript', 'typescript'] }
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'itchyny/lightline.vim'
 Plug 'cohama/lexima.vim'
+Plug 'othree/html5.vim'
 
 "colorscheme
 Plug 'tpope/vim-vividchalk'
@@ -140,6 +142,8 @@ colorscheme gruvbox
 " フォルダアイコンの表示をON
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol='x'
+
+let g:vim_jsx_pretty_colorful_config = 1
 
 " Lightline---------------------------------------
 " set showtabline=2  " Show tabline
@@ -290,6 +294,10 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
+" vim-js-pretty-template
+autocmd FileType javascript JsPreTmpl html
+autocmd FileType typescript JsPreTmpl html
+
 " NERDTree ---------------------------------------------------------------------
 nmap <C-\> :NERDTreeToggle<cr>
 map <silent> <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
@@ -321,8 +329,6 @@ call NERDTreeHighlightFile('js', 'Magenta', 'none', '#ffa500', '#151515')
 
 " save
 nmap <Space>w :w<CR>
-nmap <Space>q :q<CR>
-nmap <Space>q :q<CR>
 nmap <Space>z <C-z>
 nmap <Space>e :e!<CR>
 
