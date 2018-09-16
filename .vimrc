@@ -16,11 +16,13 @@ Plug 'tomtom/tcomment_vim'
 Plug 'Shougo/neocomplcache'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler'
+" Plug 'Shougo/denite.nvim'
 Plug 'scrooloose/nerdtree'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'h1mesuke/unite-outline'
 Plug 'vim-ruby/vim-ruby'
 Plug 'othree/html5.vim'
+Plug 'godlygeek/tabular', { 'for': 'markdown' } | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'scrooloose/nerdtree'
@@ -45,7 +47,7 @@ call plug#end()
 filetype on
 
 " Visualmode 調整
-autocmd ColorScheme gruvbox highlight Visual cterm=bold ctermbg=238 ctermfg=NONE
+autocmd ColorScheme gruvbox highlight Visual cterm=bold ctermbg=240 ctermfg=NONE
 
 " 文字コードの設定
 set encoding=utf-8
@@ -77,6 +79,22 @@ nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
 nnoremap sq :<C-u>q<CR>
 
+" Unite.vim
+" nnoremap [unite] <Nop>
+" nmap     <Leader>u [unite]
+
+" Denite.vim
+" nnoremap <silent> [unite]r :<C-u>Denite<Space>file_mru<Return>
+" nnoremap <silent> [unite]b :<C-u>Denite<Space>buffer<Return>
+" nnoremap <silent> [unite]fp :<C-u>Denite<Space>file_rec<Return>
+" nnoremap <silent> [unite]gp :<C-u>Denite<Space>grep<Return>
+" nnoremap <silent> [unite]l :<C-u>Denite<Space>line<Return>
+" nnoremap <silent> [unite]u :<C-u>Denite<Space>-resume<Return>
+
+" call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+" call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+" call denite#custom#map('insert', '<C-x>', '<denite:input_command_line>', 'noremap')
+"
 " TABキーを押した際にタブ文字の代わりにスペースを入れる
 set expandtab
 set tabstop=2
@@ -242,7 +260,7 @@ let g:vim_jsx_pretty_colorful_config = 1
 
 
 "airline------------------------------------------------
-let g:airline_theme ='dracula'
+let g:airline_theme ='violet'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_format = {
 	\ '0': '0 ',
