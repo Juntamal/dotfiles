@@ -73,6 +73,11 @@ nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
 nnoremap sq :<C-u>q<CR>
 
+augroup QuickFixCmd
+  autocmd!
+  autocmd QuickFixCmdPost *grep* cwindow
+augroup END
+
 " Unite.vim
 " nnoremap [unite] <Nop>
 " nmap     <Leader>u [unite]
@@ -254,7 +259,7 @@ let g:vim_jsx_pretty_colorful_config = 1
 
 
 "airline------------------------------------------------
-let g:airline_theme ='violet'
+let g:airline_theme ='dracula'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_format = {
 	\ '0': '0 ',
