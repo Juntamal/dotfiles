@@ -357,8 +357,9 @@ exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extens
 endfunction
 
 call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('slim', 'green', 'none', 'green', '#151515')
 call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('md', 'Magenta', 'none', '#3366FF', '#151515')
 call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
@@ -368,7 +369,7 @@ call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('rb', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('js', 'Magenta', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('js', 'blue', 'none', '#ffa500', '#151515')
 
 " save
 nmap <Space>w :w<CR>
