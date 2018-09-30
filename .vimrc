@@ -364,12 +364,14 @@ call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'green', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('scss', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('sass', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('rb', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('js', 'blue', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('js', 'Magenta', 'none', '#ffa500', '#151515')
 
 " save
 nmap <Space>w :w<CR>
