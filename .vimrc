@@ -34,6 +34,7 @@ Plug 'mattn/emmet-vim'
 " Plug 'itchyny/lightline.vim'
 Plug 'cohama/lexima.vim'
 Plug 'othree/html5.vim'
+Plug 'rking/ag.vim'
 
 "colorscheme
 Plug 'tpope/vim-vividchalk'
@@ -48,6 +49,12 @@ filetype on
 
 " Visualmode 調整
 autocmd ColorScheme gruvbox highlight Visual cterm=bold ctermbg=240 ctermfg=NONE
+
+" システムのコピーペースト
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+vmap <Leader>y "+y
+
 
 " 文字コードの設定
 set encoding=utf-8
@@ -73,10 +80,7 @@ nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
 nnoremap sq :<C-u>q<CR>
 
-augroup QuickFixCmd
-  autocmd!
-  autocmd QuickFixCmdPost *grep* cwindow
-augroup END
+autocmd QuickFixCmdPost *grep* cwindow
 
 " Unite.vim
 " nnoremap [unite] <Nop>
@@ -301,7 +305,19 @@ let g:buftabs_only_basename=1
 let g:buftabs_in_statusline=1
 
 " ctrlp
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+set wildignore+=*.so,*.swp,*.zip,*.jpg,*.png
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|build)$'
+let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
+endif
 
 " indentLine
 " let g:indentLine_color_term = 1
