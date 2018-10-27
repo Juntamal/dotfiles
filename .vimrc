@@ -80,7 +80,12 @@ nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
 nnoremap sq :<C-u>q<CR>
 
+" quickfix
 autocmd QuickFixCmdPost *grep* cwindow
+nnoremap cp :cprevious<CR>   " 前へ
+nnoremap cn :cnext<CR>       " 次へ
+nnoremap cP :<C-u>cfirst<CR> " 最初へ
+nnoremap cN :<C-u>clast<CR>  " 最後へ
 
 " Unite.vim
 " nnoremap [unite] <Nop>
