@@ -16,7 +16,9 @@ Plug 'tomtom/tcomment_vim'
 Plug 'Shougo/neocomplcache'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler'
+Plug 'tpope/vim-surround'
 " Plug 'Shougo/denite.nvim'
+Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'h1mesuke/unite-outline'
@@ -34,8 +36,7 @@ Plug 'mattn/emmet-vim'
 " Plug 'itchyny/lightline.vim'
 Plug 'cohama/lexima.vim'
 Plug 'othree/html5.vim'
-Plug 'rking/ag.vim'
-
+Plug 'mileszs/ack.vim'
 "colorscheme
 Plug 'tpope/vim-vividchalk'
 Plug 'morhetz/gruvbox'
@@ -51,9 +52,9 @@ filetype on
 autocmd ColorScheme gruvbox highlight Visual cterm=bold ctermbg=240 ctermfg=NONE
 
 " システムのコピーペースト
-vmap <Leader>p "+p
-vmap <Leader>P "+P
-vmap <Leader>y "+y
+vmap <Space>p "+p
+vmap <Space>P "+P
+vmap <Space>y "+y
 
 
 " 文字コードの設定
@@ -88,6 +89,20 @@ nnoremap [Q :<C-u>cfirst<CR> " 最初へ
 nnoremap ]Q :<C-u>clast<CR>  " 最後へ
 set modifiable
 set write
+
+" 保存時のみ実行する
+let g:ale_lint_on_text_changed = 0
+" 表示に関する設定
+let g:ale_sign_error = ''
+let g:ale_sign_warning = ''
+let g:airline#extensions#ale#open_lnum_symbol = '('
+let g:airline#extensions#ale#close_lnum_symbol = ')'
+let g:ale_echo_msg_format = '[%linter%]%code: %%s'
+highlight link ALEErrorSign Tag
+highlight link ALEWarningSign StorageClass
+" Ctrl + kで次の指摘へ、Ctrl + jで前の指摘へ移動
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Unite.vim
 " nnoremap [unite] <Nop>
@@ -316,14 +331,13 @@ set wildignore+=*.so,*.swp,*.zip,*.jpg,*.png
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|build)$'
 let g:ctrlp_use_caching = 0
 if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-
+    let g:ackprg = 'ag --vimgrep'
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-    \ }
+" else
+"   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+"   let g:ctrlp_prompt_mappings = {
+"     \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+"     \ }
 endif
 
 " indentLine
