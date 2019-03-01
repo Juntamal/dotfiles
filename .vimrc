@@ -17,6 +17,8 @@ Plug 'Shougo/neocomplcache'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler'
 Plug 'tpope/vim-surround'
+Plug 'thinca/vim-qfreplace'
+Plug 'ngmy/vim-rubocop'
 " Plug 'Shougo/denite.nvim'
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
@@ -29,13 +31,11 @@ Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'scrooloose/nerdtree'
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] } | Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
-Plug 'Quramy/vim-js-pretty-template', { 'for': ['javascript', 'typescript'] }
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mattn/emmet-vim'
 " Plug 'itchyny/lightline.vim'
 Plug 'cohama/lexima.vim'
-Plug 'othree/html5.vim'
 Plug 'mileszs/ack.vim'
 "colorscheme
 Plug 'tpope/vim-vividchalk'
@@ -56,7 +56,6 @@ vmap <Space>p "+p
 vmap <Space>P "+P
 vmap <Space>y "+y
 
-
 " 文字コードの設定
 set encoding=utf-8
 set termencoding=utf-8
@@ -64,6 +63,9 @@ set fileencoding=utf-8
 set guifont=Cica:h16
 set printfont=Cica:h12
 set ambiwidth=double
+
+"rubocop
+let g:vimrubocop_config = '/.rubocop.yml'
 
 " 画面分割
 nnoremap s <Nop>
@@ -360,10 +362,6 @@ let g:multi_cursor_next_key            = '<C-n>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
-
-" vim-js-pretty-template
-autocmd FileType javascript JsPreTmpl html
-autocmd FileType typescript JsPreTmpl html
 
 " NERDTree ---------------------------------------------------------------------
 nmap <C-\> :NERDTreeToggle<cr>
