@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ctrlpvim/ctrlp.vim'
