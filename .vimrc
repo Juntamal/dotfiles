@@ -1,5 +1,8 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -8,18 +11,12 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-rvm'
-Plug 'tpope/vim-haml'
 Plug 'tpope/vim-fugitive'
-Plug 'skwp/vim-rspec'
 Plug 'tomtom/tcomment_vim'
-Plug 'Shougo/neocomplcache'
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimfiler'
 Plug 'tpope/vim-surround'
 Plug 'thinca/vim-qfreplace'
 Plug 'ngmy/vim-rubocop'
-" Plug 'Shougo/denite.nvim'
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
 Plug 'bronson/vim-trailing-whitespace'
@@ -29,23 +26,23 @@ Plug 'othree/html5.vim'
 Plug 'godlygeek/tabular', { 'for': 'markdown' } | Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'hail2u/vim-css3-syntax'
-Plug 'scrooloose/nerdtree'
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] } | Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'othree/es.next.syntax.vim'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mattn/emmet-vim'
-" Plug 'itchyny/lightline.vim'
 Plug 'cohama/lexima.vim'
 Plug 'mileszs/ack.vim'
-"colorscheme
-Plug 'tpope/vim-vividchalk'
-Plug 'morhetz/gruvbox'
-Plug 'sjl/badwolf'
 
+"colorscheme
+Plug 'morhetz/gruvbox'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
+
+highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
+
+set completeopt-=preview
+
+set showmatch " 括弧の対応関係を一瞬表示する
+source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
 
 " ファイル形式の検出
 filetype on
@@ -57,6 +54,8 @@ autocmd ColorScheme gruvbox highlight Visual cterm=bold ctermbg=240 ctermfg=NONE
 vmap <Space>p "+p
 vmap <Space>P "+P
 vmap <Space>y "+y
+
+highlight link CocErrorSign GruvboxRed
 
 " 文字コードの設定
 set encoding=utf-8
@@ -102,28 +101,15 @@ let g:ale_sign_warning = ''
 let g:airline#extensions#ale#open_lnum_symbol = '('
 let g:airline#extensions#ale#close_lnum_symbol = ')'
 let g:ale_echo_msg_format = '[%linter%]%code: %%s'
+let g:ale_fixers = {
+\   'ruby': ['rubocop'],
+\}
 highlight link ALEErrorSign Tag
 highlight link ALEWarningSign StorageClass
 " Ctrl + kで次の指摘へ、Ctrl + jで前の指摘へ移動
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" Unite.vim
-" nnoremap [unite] <Nop>
-" nmap     <Leader>u [unite]
-
-" Denite.vim
-" nnoremap <silent> [unite]r :<C-u>Denite<Space>file_mru<Return>
-" nnoremap <silent> [unite]b :<C-u>Denite<Space>buffer<Return>
-" nnoremap <silent> [unite]fp :<C-u>Denite<Space>file_rec<Return>
-" nnoremap <silent> [unite]gp :<C-u>Denite<Space>grep<Return>
-" nnoremap <silent> [unite]l :<C-u>Denite<Space>line<Return>
-" nnoremap <silent> [unite]u :<C-u>Denite<Space>-resume<Return>
-
-" call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-" call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
-" call denite#custom#map('insert', '<C-x>', '<denite:input_command_line>', 'noremap')
-"
 " TABキーを押した際にタブ文字の代わりにスペースを入れる
 set expandtab
 set tabstop=2
@@ -167,20 +153,14 @@ set showcmd
 " タブと行の続きを可視化する
 set listchars=tab:>\ ,extends:<
 
-" 対応する括弧やブレースを表示する
-set showmatch
-
 " emmet
 let g:user_emmet_leader_key='<c-y>'
 
 " 検索
 set hlsearch
-set ignorecase
 set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
 set ignorecase " 検索パターンに大文字小文字を区別しない
-set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
 set hlsearch " 検索結果をハイライト
-" ESCキー2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 
 " クリップボード-----------------------------------
@@ -206,127 +186,90 @@ let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol='x'
 let g:vim_jsx_pretty_colorful_config = 1
 
 " Lightline---------------------------------------
-" set showtabline=2  " Show tabline
-" let g:lightline = {
-"             \ 'colorscheme': 'one',
-"             \ 'active': {
-"             \   'left': [ [ 'mode', 'paste' ],
-"             \             [ 'fugitive', 'filename' ] ]
-"             \ },
-"             \ 'component_function': {
-"             \   'fugitive': 'LightLineFugitive',
-"             \   'readonly': 'LightLineReadonly',
-"             \   'modified': 'LightLineModified',
-"             \   'filename': 'LightLineFilename',
-"             \   'filetype': 'LightLineFiletype',
-"             \   'fileformat': 'LightLineFileformat',
-"             \ },
-"             \ 'separator': { 'left': '', 'right': '' },
-"             \ 'subseparator': { 'left': '', 'right': '' }
-"             \ }
-"
-" function! LightLineModified()
-"     if &filetype == "help"
-"         return ""
-"     elseif &modified
-"         return "+"
-"     elseif &modifiable
-"         return ""
-"     else
-"         return ""
-"     endif
-" endfunction
-"
-" function! LightLineReadonly()
-"     if &filetype == "help"
-"         return ""
-"     elseif &readonly
-"         return ""
-"     else
-"         return ""
-"     endif
-" endfunction
-"
-" function! LightLineFugitive()
-"     if exists("*fugitive#head")
-"         let _ = fugitive#head()
-"         return strlen(_) ? ''._ : ''
-"     endif
-"     return ''
-" endfunction
-"
-" function! LightLineFilename()
-"     return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-"                 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-"                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-" endfunction
-"
-" function! LightLineFiletype()
-"   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-" endfunction
-"
-" function! LightLineFileformat()
-"   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-" endfunction
-"
-" let g:lightline.tabline = {
-"   \   'left': [ ['tabs'] ],
-"   \   'right': [ ['close'] ]
-"   \ }
+set showtabline=2  " always show tabline
+let g:lightline = {
+            \ 'colorscheme': 'wombat',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'fugitive', 'filename' ] ]
+            \ },
+            \ 'component_function': {
+            \   'fugitive': 'LightLineFugitive',
+            \   'readonly': 'LightLineReadonly',
+            \   'modified': 'LightLineModified',
+            \   'filename': 'LightLineFilename',
+            \   'filetype': 'LightLineFiletype',
+            \   'fileformat': 'LightLineFileformat',
+            \   'bufferinfo': 'lightline#buffer#bufferinfo',
+            \   'mode': 'LightlineMode',
+            \ },
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' }
+            \ }
 
+function! LightlineMode()
+  return expand('%:t') ==# '__Tagbar__' ? 'Tagbar':
+        \ expand('%:t') ==# 'ControlP' ? 'CtrlP' :
+        \ &filetype ==# 'unite' ? 'Unite' :
+        \ &filetype ==# 'vimfiler' ? 'VimFiler' :
+        \ &filetype ==# 'vimshell' ? 'VimShell' :
+        \ lightline#mode()
+endfunction
 
-"airline------------------------------------------------
-let g:airline_theme ='dracula'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_idx_format = {
-	\ '0': '0 ',
-	\ '1': '1 ',
-	\ '2': '2 ',
-	\ '3': '3 ',
-	\ '4': '4 ',
-	\ '5': '5 ',
-	\ '6': '6 ',
-	\ '7': '7 ',
-	\ '8': '8 ',
-	\ '9': '9 '
-	\}
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-" airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#unnamed      = '[No Name]'
+let g:lightline#bufferline#filename_modifier = ':t'
+let g:lightline#bufferline#unicode_symbols = 1
 
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
 
-let ruby_space_errors=1
-let g:rubycomplete_buffer_loading=1
-let g:rubycomplete_classes_in_global=1
-let g:rubycomplete_rails=1
-let g:rails_level=4
-let g:rails_syntax=1
-let g:javascript_plugin_flow = 1
+function! LightLineModified()
+     if &filetype == "help"
+         return ""
+     elseif &modified
+         return ""
+     elseif &modifiable
+         return ""
+     else
+         return ""
+     endif
+endfunction
 
-"バッファタブにパスを省略してファイル名のみ表示する(buftabs.vim)
-let g:buftabs_only_basename=1
+function! LightLineReadonly()
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineFugitive()
+    if exists("*fugitive#head")
+        let _ = fugitive#head()
+        return strlen(_) ? ''._ : ''
+    endif
+    return ''
+endfunction
+
+function! LightLineFilename()
+    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+                \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! LightLineFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
 "バッファタブをステータスライン内に表示する
 let g:buftabs_in_statusline=1
 
@@ -337,23 +280,12 @@ let g:ctrlp_use_caching = 0
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" else
-"   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-"   let g:ctrlp_prompt_mappings = {
-"     \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-"     \ }
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
 endif
-
-" indentLine
-" let g:indentLine_color_term = 1
-" let g:indentLine_color_gui = '#708090'
-" let g:indentLine_char = '|'
-"neocomplcache周りの設定
-let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_enable_smart_case=1
-let g:neocomplcache_enable_camel_case_completion=1
-let g:neocomplcache_enable_underbar_completion=1
-let g:neocomplcache_min_syntax_length=3
 
 " Default mapping
 let g:multi_cursor_start_word_key      = '<C-n>'
@@ -449,12 +381,6 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
-function! MagicComment()
-  return "# coding: utf-8\<CR>"
-endfunction
-
-inoreabbrev <buffer> #### <C-R>=MagicComment()<CR>
-
 " Space + . でvimrcを開く
 nnoremap <Space>. :<C-u>edit ~/.vimrc<Enter>
 
@@ -464,28 +390,3 @@ noremap ; :
 noremap <Shift>: ;
 
 set listchars=eol:$,tab:>\
-
-autocmd FileType ruby map <F9> :w<CR>:!ruby -c %<CR>
-
-
-function! Scouter(file, ...)
-	let pat = '^\s*$\|^\s*"'
-	let lines = readfile(a:file)
-	if !a:0 || !a:1
-		let lines = split(substitute(join(lines, "\n"), '\n\s*\\', '', 'g'), "\n")
-	endif
-	return len(filter(lines,'v:val !~ pat'))
-endfunction
-command! -bar -bang -nargs=? -complete=file Scouter
-			\        echo Scouter(empty(<q-args>) ? $MYVIMRC : expand(<q-args>), <bang>0)
-
-
-function! s:SetupSpeCuke()
-	command! RunTestFile exe '!sc ' . expand('%:p')
-	command! RunTestCase exe '!sc --line ' . line('.') . ' ' . expand('%:p')
-
-	nnoremap -tf :RunTestFile<CR>
-	nnoremap -tc :RunTestCase<CR>
-endfunction
-
-au BufRead,BufNewFile *_spec.rb,*.feature call s:SetupSpeCuke()
