@@ -1,7 +1,11 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'css', 'scss', 'json', 'markdown', 'yaml', 'html', 'jsx'] }
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 Plug 'itchyny/lightline.vim'
+Plug 'thinca/vim-quickrun'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
@@ -95,6 +99,11 @@ set write
 
 " 保存時のみ実行する
 let g:ale_lint_on_text_changed = 0
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
+let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let g:ale_javascript_prettier_use_local_config = 1
 " 表示に関する設定
 let g:ale_sign_error = ''
 let g:ale_sign_warning = ''
@@ -191,7 +200,7 @@ let g:lightline = {
             \ 'colorscheme': 'wombat',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'filename' ] ]
+            \             [ 'cocstatus','fugitive', 'filename' ] ]
             \ },
             \ 'component_function': {
             \   'fugitive': 'LightLineFugitive',
@@ -201,6 +210,7 @@ let g:lightline = {
             \   'filetype': 'LightLineFiletype',
             \   'fileformat': 'LightLineFileformat',
             \   'bufferinfo': 'lightline#buffer#bufferinfo',
+            \   'cocstatus': 'coc#status',
             \   'mode': 'LightlineMode',
             \ },
             \ 'separator': { 'left': '', 'right': '' },
